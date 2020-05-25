@@ -1,29 +1,32 @@
 # i_charge
-1. To compile using gnu compiler.
 
-   gfortran -w -O3            read_qcube.f
-                              make_input.f      read_input.f
-                            build_matrix.f    const_matrix.f
-                                  lubksb.f          ludcmp.f
-                                  svbksb.f          svdcmp.f
-                               solve_lud.f       solve_svd.f
-                            print_matrix.f    print_charge.f
-                                  pythag.f  charge_fitting.f
-            -o  i_CHARGE
+C     This program is distributed in the hope that it will be useful,
+C     but WITHOUT ANY WARRANTY; without even the implied warranty of
+C     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+C     GNU General Public License for more details.
 
-   a) -std=legacy or -w to surpress the warnings
-   b) -O3
+C     THE VERSION 5.0 HAS BEEN DEVELOPED TO FIT
+C     PARTIAL ATOMIC CHARGES FOR MOLECULAR DYNAMICS
+C     SIMULATIONS FOR A VERIETY OF ORGANIC COMPOUNDS.
+C     A GRID OF ELECTROSTATIC POTENTIAL POINTS IS
+C     GENERATED FROM QM CALCULATIONS AND THESE
+C     POINTS ARE FITTED TO AN ATOM-CENTERED POINT
+C     CHARGE MODEL. PARTIAL ATOMIC CHARGES ARE THEN
+C     USED TO CALCULATE MOLECULAR MULTIPOLE MOMENTS.
+C
+C     ELECTROSTATIC POTENTIAL POINTS THAT LAY WITHIN
+C     THE VAN DER WAALS ATOMIC SURFACES ARE EXCLUDED
+C     FROM THE FITTING TO AVOID CONTRIBUTION FROM
+C     EXCHANGE REPULSION AND CHARGE TRANSFER INTERACTIONS.
+C
+C     A SQUARE MATRIX A IS BUILT AND THEN IT IS
+C     DECOMPOSED USING LU (A = L U) OR SVD (A = U W V)
+C     DECOMPOSITION TECHNIQUES. ONE OF THESE TWO TECHNIQUES
+C     CAN BE CHOISEN BY PUTING .true. VALUE IN parameter.h FILE.
+C
+C     CONSTRAINTS
 
-2. The charge_fitting.f subroutine is the main driver for fitting charges.
-
-3. The read_qcube.f subroutine reads electrostatic potential file, a qube file,
-   generated from QM calculations.
-
-4. The write_matrix.f subroutine creates A and b matrices.
-
-5. The LU decomposition subroutine includes three extra subroutines
-   from numerical recepies. It decomposes A matrix to L and U matrices.
-
-6. The SVD decomposition subroutine includes two extra subroutines
-   that are also taken from numerical recepies. It decomposes A matrix
-   to U, W, and V matrices.
+C     Any constraints imposed should be based on
+C     atom order number as it is listed in your
+C     cube file. The charge constrains should be
+C     imposed in a crossed closed way, see example below.
