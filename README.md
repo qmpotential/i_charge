@@ -11,10 +11,6 @@
                                   pythag.f  charge_fitting.f
             -o  i_CHARGE
 
-           << OR >>
-
-gfortran -w -O3 set_name.f set_radius.f read_qcube.f make_input.f read_input.f build_matrix.f const_matrix.f lubksb.f ludcmp.f svbksb.f svdcmp.f solve_lud.f solve_svd.f print_matrix.f print_charge.f pythag.f charge_fitting.f -o i_CHARGE
-
    a) -std=legacy or -w to surpress the warnings
    b) -O3
 
